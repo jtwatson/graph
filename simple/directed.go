@@ -234,6 +234,22 @@ func (g *DirectedGraph) Degree(n graph.Node) int {
 	return len(g.successors[n.ID()]) + len(g.predecessors[n.ID()])
 }
 
+func (g *DirectedGraph) InDegree(n graph.Node) int {
+	if _, ok := g.nodeMap[n.ID()]; !ok {
+		return 0
+	}
+
+	return len(g.predecessors[n.ID()])
+}
+
+func (g *DirectedGraph) OutDegree(n graph.Node) int {
+	if _, ok := g.nodeMap[n.ID()]; !ok {
+		return 0
+	}
+
+	return len(g.successors[n.ID()])
+}
+
 func (g *DirectedGraph) Nodes() []graph.Node {
 	nodes := make([]graph.Node, len(g.successors))
 	i := 0

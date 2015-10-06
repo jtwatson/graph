@@ -61,3 +61,46 @@ func TestIssue123UndirectedGraph(t *testing.T) {
 	n2 := Node(g.NewNodeID())
 	g.AddNode(n2)
 }
+
+func TestUndirectedDegree(t *testing.T) {
+	g := generateDummyUndirectedGraph()
+
+	g.AddNode(Node(4))
+
+	if degree := g.Degree(Node(0)); degree != 2 {
+		t.Errorf("Node 0 has incorrect Degree, got Degree of %d, expected 2\n", degree)
+	}
+
+	if degree := g.Degree(Node(1)); degree != 2 {
+		t.Errorf("Node 1 has incorrect Degree, got Degree of %d, expected 2\n", degree)
+	}
+
+	if degree := g.Degree(Node(2)); degree != 2 {
+		t.Errorf("Node 2 has incorrect Degree, got Degree of %d, expected 2\n", degree)
+	}
+
+	if degree := g.Degree(Node(3)); degree != 0 {
+		t.Errorf("Node 3 has incorrect Degree, got Degree of %d, expected 0\n", degree)
+	}
+
+	if degree := g.Degree(Node(4)); degree != 0 {
+		t.Errorf("Node 4 has incorrect Degree, got Degree of %d, expected 0\n", degree)
+	}
+
+}
+
+func generateDummyUndirectedGraph() *UndirectedGraph {
+	nodes := []struct{ srcId, targetId int }{
+		{2, 1},
+		{1, 0},
+		{2, 0},
+	}
+
+	g := NewUndirectedGraph(0, math.Inf(1))
+
+	for _, n := range nodes {
+		g.SetEdge(Edge{F: Node(n.srcId), T: Node(n.targetId), W: 1})
+	}
+
+	return g
+}

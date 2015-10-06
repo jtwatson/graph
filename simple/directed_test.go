@@ -61,3 +61,66 @@ func TestIssue123DirectedGraph(t *testing.T) {
 	n2 := Node(g.NewNodeID())
 	g.AddNode(n2)
 }
+
+func TestDirectedDegree(t *testing.T) {
+	g := generateDummyGraph()
+
+	if degree := g.Degree(Node(0)); degree != 3 {
+		t.Errorf("Node 0 has incorrect Degree, got Degree of %d, expected 3\n", degree)
+	}
+
+	if degree := g.Degree(Node(1)); degree != 2 {
+		t.Errorf("Node 1 has incorrect Degree, got Degree of %d, expected 2\n", degree)
+	}
+
+	if degree := g.Degree(Node(2)); degree != 3 {
+		t.Errorf("Node 2 has incorrect Degree, got Degree of %d, expected 3\n", degree)
+	}
+
+	if degree := g.Degree(Node(3)); degree != 0 {
+		t.Errorf("Node 3 has incorrect Degree, got Degree of %d, expected 0\n", degree)
+	}
+
+}
+
+func TestInDegree(t *testing.T) {
+	g := generateDummyGraph()
+
+	if degree := g.InDegree(Node(0)); degree != 2 {
+		t.Errorf("Node 0 has incorrect InDegree, got InDegree of %d, expected 2\n", degree)
+	}
+
+	if degree := g.InDegree(Node(1)); degree != 1 {
+		t.Errorf("Node 1 has incorrect InDegree, got InDegree of %d, expected 1\n", degree)
+	}
+
+	if degree := g.InDegree(Node(2)); degree != 1 {
+		t.Errorf("Node 2 has incorrect InDegree, got InDegree of %d, expected 1\n", degree)
+	}
+
+	if degree := g.InDegree(Node(3)); degree != 0 {
+		t.Errorf("Node 3 has incorrect InDegree, got InDegree of %d, expected 0\n", degree)
+	}
+
+}
+
+func TestOutDegree(t *testing.T) {
+	g := generateDummyGraph()
+
+	if degree := g.OutDegree(Node(0)); degree != 1 {
+		t.Errorf("Node 0 has incorrect OutDegree, got OutDegree of %d, expected 1\n", degree)
+	}
+
+	if degree := g.OutDegree(Node(1)); degree != 1 {
+		t.Errorf("Node 1 has incorrect OutDegree, got OutDegree of %d, expected 1\n", degree)
+	}
+
+	if degree := g.OutDegree(Node(2)); degree != 2 {
+		t.Errorf("Node 2 has incorrect OutDegree, got OutDegree of %d, expected 2\n", degree)
+	}
+
+	if degree := g.OutDegree(Node(3)); degree != 0 {
+		t.Errorf("Node 3 has incorrect OutDegree, got OutDegree of %d, expected 0\n", degree)
+	}
+
+}
